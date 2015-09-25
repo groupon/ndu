@@ -1,0 +1,56 @@
+{
+  "name": "ndu",
+  "version": "0.0.0",
+  "description": "node disk usage",
+  "license": "BSD-3-Clause",
+  "main": "lib/ndu.js",
+  "bin": "cli.js",
+  "homepage": "https://github.com/groupon/ndu",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/groupon/ndu"
+  },
+  "bugs": {
+    "email": "opensource@groupon.com",
+    "url": "https://github.com/groupon/ndu/issues"
+  },
+  "scripts": {
+    "start": "./cli.js --open",
+    "pretest": "eslint lib test",
+    "test": "mocha",
+    "posttest": "nlm verify"
+  },
+  "nlm": {
+    "license": {
+      "files": [
+        "lib"
+      ]
+    }
+  },
+  "dependencies": {
+    "browserify": "^13.0.0",
+    "bytes": "^2.1.0",
+    "d3": "^3.5.16",
+    "lodash": "^4.6.1",
+    "minimist": "^1.2.0",
+    "opener": "^1.4.1"
+  },
+  "devDependencies": {
+    "assertive": "^2.0.0",
+    "eslint": "^1.0.0",
+    "eslint-config-groupon": "^2.0.0",
+    "mocha": "^2.0.0",
+    "nlm": "^2.0.0"
+  },
+  "author": {
+    "name": "Groupon",
+    "email": "opensource@groupon.com"
+  },
+  "files": [
+    "*.js",
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
+}
