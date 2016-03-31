@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - '4'
+before_install:
+  - npm install -g npm@latest-2
+before_deploy:
+  - 'git config --global user.email "opensource@groupon.com"'
+  - 'git config --global user.name "Groupon"'
+deploy:
+  provider: script
+  script: ./node_modules/.bin/nlm release
+  skip_cleanup: true
+  'on':
+    branch: master
+    node: '4'
