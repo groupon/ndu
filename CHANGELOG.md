@@ -1,3 +1,9 @@
+### 1.1.0
+
+* Support for latest firefox - **[@jkrems](https://github.com/jkrems)** [#2](https://github.com/groupon/ndu/pull/2)
+  - [`d806201`](https://github.com/groupon/ndu/commit/d806201145e0cab287cde1a4ea5c4a8e4adeeb01) **feat:** Support for latest firefox
+
+
 ### 1.0.0
 
 * Use nlm for publishing - **[@jkrems](https://github.com/jkrems)** [#1](https://github.com/groupon/ndu/pull/1)
