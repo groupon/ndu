@@ -14,81 +14,82 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 'use strict';
-const bytes = require('bytes');
-const d3 = require('d3');
-const _ = require('lodash');
+/* eslint no-var: 0, vars-on-top: 0 */
+var bytes = require('bytes');
+var d3 = require('d3');
+var _ = require('lodash');
 
-const WIDTH = 1000;
-const HEIGHT = 1000;
+var WIDTH = 1000;
+var HEIGHT = 1000;
 
-const styles = document.createElement('style');
-styles.innerText = `
-html, body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
-}
-
-h4 {
-  color: #999;
-}
-
-a:link, a:visited {
-  color: #3b73af;
-}
-
-h4 strong {
-  font-weight: normal;
-  color: #333;
-}
-
-h4 span {
-  padding: 0 2px;
-}
-
-#wrap {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: row;
-}
-
-#graph {
-  flex: 0 1 100%;
-  position: relative;
-}
-
-#graph svg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-#details {
-  flex: 0 0 33%;
-}
-
-#details h4 {
-  font-size: 16px;
-  font-weight: 200;
-}
-
-#graph path {
-  cursor: pointer;
-}
-
-#graph path:hover {
-  opacity: 0.5;
-}
-`;
+var styles = document.createElement('style');
+styles.innerText = [
+  'html, body {',
+  '  padding: 0;',
+  '  margin: 0;',
+  '  width: 100%;',
+  '  height: 100%;',
+  '  font-family: Helvetica, Arial, sans-serif;',
+  '  font-size: 14px;',
+  '}',
+  '',
+  'h4 {',
+  '  color: #999;',
+  '}',
+  '',
+  'a:link, a:visited {',
+  '  color: #3b73af;',
+  '}',
+  '',
+  'h4 strong {',
+  '  font-weight: normal;',
+  '  color: #333;',
+  '}',
+  '',
+  'h4 span {',
+  '  padding: 0 2px;',
+  '}',
+  '',
+  '#wrap {',
+  '  display: flex;',
+  '  height: 100%;',
+  '  width: 100%;',
+  '  flex-direction: row;',
+  '}',
+  '',
+  '#graph {',
+  '  flex: 0 1 100%;',
+  '  position: relative;',
+  '}',
+  '',
+  '#graph svg {',
+  '  position: absolute;',
+  '  left: 0;',
+  '  top: 0;',
+  '  right: 0;',
+  '  bottom: 0;',
+  '}',
+  '',
+  '#details {',
+  '  flex: 0 0 33%;',
+  '}',
+  '',
+  '#details h4 {',
+  '  font-size: 16px;',
+  '  font-weight: 200;',
+  '}',
+  '',
+  '#graph path {',
+  '  cursor: pointer;',
+  '}',
+  '',
+  '#graph path:hover {',
+  '  opacity: 0.5;',
+  '}',
+].join('\n');
 document.head.appendChild(styles);
 
-const statsData = JSON.parse(
+var statsData = JSON.parse(
   document.getElementById('stats-data').innerHTML
 );
 
@@ -96,7 +97,7 @@ function isTopLevelChild(node) {
   return node.path.indexOf('/') === -1;
 }
 
-const defaultRoot = {
+var defaultRoot = {
   path: '.',
   directory: '.',
   self: 0,
@@ -107,10 +108,10 @@ defaultRoot.size = _.sumBy(defaultRoot.children, 'size');
 
 function addParentRefsAndName(node) {
   node.name = node.path.split('/').pop();
-  for (const child of node.children) {
+  node.children.forEach(function addToChild(child) {
     child.parent = node;
     addParentRefsAndName(child);
-  }
+  });
 }
 addParentRefsAndName(defaultRoot);
 
@@ -119,27 +120,29 @@ function sliceColor(weight, position, depth) {
 }
 
 function formatBytes(byteCount) {
-  const pretty = bytes(byteCount * 1024);
-  const pct = Math.round(byteCount / defaultRoot.size * 100);
-  return `${pretty} / ${pct}%`;
+  var pretty = bytes(byteCount * 1024);
+  var pct = Math.round(byteCount / defaultRoot.size * 100);
+  return pretty + ' / ' + pct + '%';
 }
 
-let showNodeInfo; // defined further down
+var showNodeInfo; // defined further down
 
 function renderWithRoot(rootNode) {
-  const maxLevel = (function findMaxLevel(level, node) {
+  var maxLevel = (function findMaxLevel(level, node) {
     node.level = level;
     node.children = _.orderBy(node.children, ['size'], ['desc']);
     return Math.max.apply(null, [node.level].concat(
-      node.children.map(child => findMaxLevel(level + 1, child))
+      node.children.map(function findInChild(child) {
+        return findMaxLevel(level + 1, child);
+      })
     ));
   })(0, rootNode);
 
-  const angleScale = (2 * Math.PI) / rootNode.size;
-  const sliceSize = (HEIGHT / 2) / (maxLevel + 1);
-  const slicePadding = 2;
+  var angleScale = (2 * Math.PI) / rootNode.size;
+  var sliceSize = (HEIGHT / 2) / (maxLevel + 1);
+  var slicePadding = 2;
 
-  const svg = d3.select('#graph')
+  var svg = d3.select('#graph')
     .html('')
     .append('svg')
       .attr('viewBox', '0 0 1000 1000')
@@ -153,24 +156,24 @@ function renderWithRoot(rootNode) {
   }
 
   function renderNode(node, offset) {
-    const startAngle = offset * angleScale;
-    const arc = d3.svg.arc()
+    var startAngle = offset * angleScale;
+    var arc = d3.svg.arc()
       .innerRadius(node.level * sliceSize)
       .outerRadius((node.level + 1) * sliceSize - slicePadding)
       .startAngle(startAngle)
       .endAngle(startAngle + node.size * angleScale);
 
-    const weight = node.size / rootNode.size;
-    const position = offset / rootNode.size;
-    const depth = (node.level + 1) / (maxLevel + 1);
+    var weight = node.size / rootNode.size;
+    var position = offset / rootNode.size;
+    var depth = (node.level + 1) / (maxLevel + 1);
 
     svg.append('path')
       .attr('d', arc)
       .attr('fill', sliceColor(weight, position, depth))
       .attr('stroke', '#fff')
-      .on('mouseover', () => showNodeInfo(node))
-      .on('mouseout', () => resetNodeInfo())
-      .on('click', () => {
+      .on('mouseover', showNodeInfo.bind(null, node))
+      .on('mouseout', resetNodeInfo)
+      .on('click', function onNodeClick() {
         if (node.children.length < 1) return;
 
         if (node !== rootNode) {
@@ -180,8 +183,8 @@ function renderWithRoot(rootNode) {
         }
       });
 
-    let childOffset = offset + node.self;
-    node.children.forEach(child => {
+    var childOffset = offset + node.self;
+    node.children.forEach(function renderChild(child) {
       renderNode(child, childOffset);
       childOffset += child.size;
     });
@@ -192,14 +195,14 @@ function renderWithRoot(rootNode) {
 }
 
 showNodeInfo = function _showNodeInfo(node) {
-  const details = d3.select('#details').html('');
+  var details = d3.select('#details').html('');
 
-  const h4 = details.append('h4');
-  const segments = node.path === '.' ? [] : node.path.split('/');
+  var h4 = details.append('h4');
+  var segments = node.path === '.' ? [] : node.path.split('/');
   segments.unshift('.');
-  const leaf = segments.pop();
-  let segmentNode = defaultRoot;
-  for (const segment of segments) {
+  var leaf = segments.pop();
+  var segmentNode = defaultRoot;
+  segments.forEach(function handleSegment(segment) {
     if (segment !== '.') {
       segmentNode = _.find(segmentNode.children, { name: segment });
     }
@@ -208,11 +211,11 @@ showNodeInfo = function _showNodeInfo(node) {
       .text(segment)
       .on('click', _.partial(renderWithRoot, segmentNode));
     h4.append('span').text('/');
-  }
+  });
 
   h4.append('strong').text(leaf === '.' ? defaultRoot.name : leaf);
 
-  const statsList = details.append('dl');
+  var statsList = details.append('dl');
   statsList.append('dt').text('Total Size');
   statsList.append('dd').text(formatBytes(node.size));
   statsList.append('dt').text('Size without deps');
