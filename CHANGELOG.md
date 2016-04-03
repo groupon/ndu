@@ -1,3 +1,9 @@
+### 1.1.1
+
+* chore: Update README to be more friendly to new users - **[@ageitgey](https://github.com/ageitgey)** [#4](https://github.com/groupon/ndu/pull/4)
+  - [`2fa1369`](https://github.com/groupon/ndu/commit/2fa136982510ef14f81b23de0c5b85851684b313) **chore:** Update README to be more friendly to new users
+
+
 ### 1.1.0
 
 * Support for latest firefox - **[@jkrems](https://github.com/jkrems)** [#2](https://github.com/groupon/ndu/pull/2)
