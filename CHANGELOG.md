@@ -1,3 +1,9 @@
+### 1.1.2
+
+* docs: Introduce "Similar Tools" section - **[@jkrems](https://github.com/jkrems)** [#6](https://github.com/groupon/ndu/pull/6)
+  - [`67e53d2`](https://github.com/groupon/ndu/commit/67e53d26bd01192fe87d58ebe0641980e494a4f0) **docs:** Introduce "Similar Tools" section - see: [#5](https://github.com/groupon/ndu/issues/5)
+
+
 ### 1.1.1
 
 * chore: Update README to be more friendly to new users - **[@ageitgey](https://github.com/ageitgey)** [#4](https://github.com/groupon/ndu/pull/4)
