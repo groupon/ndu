@@ -78,3 +78,10 @@ easily see how one bloated dependency was increasing the size of the application
 
 Thanks to `ndu`, it was easy to clean up the largest dependencies and quickly
 shrink the size of the app's footprint.
+
+## Similar Tools
+
+* [`disc`](https://npmjs.com/disc): For analyzing the size of browserify bundles, platform independent
+* [`space-hogs`](https://github.com/dylang/space-hogs): Generic directory size info, highlights big entries, *nix
+* [WinDirStat](https://windirstat.info/): Generic directory size info, Windows
+* [Grand Perspective](http://grandperspectiv.sourceforge.net/): Generic directory size info, OSX
