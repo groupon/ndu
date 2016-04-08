@@ -1,3 +1,9 @@
+### 1.1.3
+
+* docs: Mention `du` requirement - **[@jkrems](https://github.com/jkrems)** [#8](https://github.com/groupon/ndu/pull/8)
+  - [`7fd0b93`](https://github.com/groupon/ndu/commit/7fd0b93bbd264825d9c4b2d9ceb80e5f5f20186d) **docs:** Mention `du` requirement
+
+
 ### 1.1.2
 
 * docs: Introduce "Similar Tools" section - **[@jkrems](https://github.com/jkrems)** [#6](https://github.com/groupon/ndu/pull/6)
