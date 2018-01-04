@@ -1,9 +1,3 @@
 {
-  "extends": "groupon/base",
-  "ecmaFeatures": {
-    "modules": false
-  },
-  "rules": {
-    "strict": [2, "global"]
-  }
+  "extends": "groupon/node4"
 }

@@ -1,4 +1,5 @@
 'use strict';
+
 const assert = require('assertive');
 const _ = require('lodash');
 
@@ -11,8 +12,7 @@ describe('generateDependencyStats', () => {
 
   describe('ndu dependency stats', () => {
     let nduStats;
-    before(() =>
-      generateDependencyStats().then(stats => nduStats = stats));
+    before(() => generateDependencyStats().then(stats => (nduStats = stats)));
 
     it('includes a node for mocha', () => {
       const mocha = _.find(nduStats, { path: 'mocha' });
@@ -25,7 +25,8 @@ describe('generateDependencyStats', () => {
 
     it('size = self + children.size', () => {
       function verifyNode(node) {
-        assert.equal(`${node.path}#size adds up`,
+        assert.equal(
+          `${node.path}#size adds up`,
           node.size,
           node.self + _.sumBy(node.children, 'size')
         );
