@@ -1,3 +1,9 @@
+### 1.1.4
+
+* Apply latest nlm generator - **[@markowsiak](https://github.com/markowsiak)** [#9](https://github.com/groupon/ndu/pull/9)
+  - [`4d1d3e2`](https://github.com/groupon/ndu/commit/4d1d3e2a5c0ead1ce974acbcf688734574561af5) **chore:** Apply latest nlm generator
+
+
 ### 1.1.3
 
 * docs: Mention `du` requirement - **[@jkrems](https://github.com/jkrems)** [#8](https://github.com/groupon/ndu/pull/8)
