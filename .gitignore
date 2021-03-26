@@ -1,5 +1,5 @@
-/yarn.lock
-/package-lock.json
 node_modules/
 npm-debug.log
 /tmp
+coverage
+/.nyc_output
