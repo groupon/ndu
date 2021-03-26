@@ -1,0 +1,17 @@
+{
+  "extends": "groupon",
+  "overrides": [
+    {
+      "files": "*.test.js",
+      "env": {
+        "mocha": true
+      }
+    },
+    {
+      "files": "plurals.js",
+      "rules": {
+        "no-unused-vars": "off"
+      }
+    }
+  ]
+}

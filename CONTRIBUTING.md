@@ -46,7 +46,7 @@ only to discover that it conflicts with plans the maintainers might have.
 The general steps for creating a pull request are:
 
 1. Create a branch for your change.
-   Always start your branch from the latest `master`.
+   Always start your branch from the latest `main`.
    We often prefix the branch name with our initials, e.g. `jk-a-change`.
 1. Run `npm install` to install the dependencies.
 1. If you're fixing a bug, be sure to write a test *first*.

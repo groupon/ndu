@@ -1,10 +1,11 @@
-# ndu - Visualize your Node app's disk space usage
+# `ndu` 
+> Visualize your Node app's disk space usage
 
-**Requires node 4+ and `du`. Windows not yet supported.**
+**Requires node 10.13+ and `du`. Windows not yet supported.**
 
 `ndu` is a tool for analyzing the size of dependencies in a node.js application.
 It's similar to [`disc`](https://npmjs.com/disc), but for server-side
-dependencies instead of client-side depedencies.
+dependencies instead of client-side dependencies.
 
 When building node.js apps, you can choose from hundreds of thousands of
 libraries available on [npm](https://www.npmjs.com/). But sometimes these
